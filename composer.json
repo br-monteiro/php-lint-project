@@ -1,0 +1,25 @@
+{
+    "name":"phbsis/php-lint-project",
+    "description":"The OKR's Project! #KR04",
+    "homepage": "https://github.com/br-monteiro/php-lint-project",
+    "type": "project",
+    "license": "GNU",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Edson B. S. Monteiro",
+            "email": "bruno.monteirodg@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "KR04\\" : "src/"
+        }
+    }
+}
