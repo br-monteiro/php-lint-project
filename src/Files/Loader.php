@@ -101,7 +101,7 @@ class Loader
 
         return var_export([
             'string' => file_get_contents($filename),
-            'array' => preg_replace("/\n/", '', file($filename))
+            'array' => file($filename)
             ], true);
     }
 
