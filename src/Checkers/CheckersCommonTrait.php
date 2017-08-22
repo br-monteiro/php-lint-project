@@ -90,7 +90,7 @@ trait CheckersCommonTrait
         for ($i = $referenceToUp; $i <= $referenceToDown; $i++) {
 
             if ($i == $reference) {
-                Colorize::show("\n[cyan]" . ($i + 1) . ' [bg-yellow][red]' . $content[$i] . '[/]');
+                Colorize::show("[cyan]" . ($i + 1) . ' [bg-yellow][red]' . trim($content[$i]) . '[/]');
                 continue;
             }
 
