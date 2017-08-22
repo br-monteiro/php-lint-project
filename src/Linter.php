@@ -4,7 +4,7 @@ namespace KR04;
 use KR04\Config\Config;
 use KR04\Checkers\Checker;
 use KR04\Files\Loader;
-use KR04\Checkers\{SyntaxChecker,TesteChecker};
+use KR04\Checkers\{SyntaxChecker, ChaordicPatternChecker, TesteChecker};
 
 class Linter
 {
@@ -30,6 +30,7 @@ class Linter
     private function configure(): Linter
     {
         $this->registerChecker(new SyntaxChecker($this->loader))
+            ->registerChecker(new ChaordicPatternChecker($this->loader))
             ->registerChecker(new TesteChecker($this->loader));
 
         return $this;
