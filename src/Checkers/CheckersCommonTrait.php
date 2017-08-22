@@ -30,7 +30,7 @@ trait CheckersCommonTrait
      * @param string $str The phrasal used to be describe the error
      * @param array $content Array of lines of the file
      */
-    public function displayError(string $str, array $content = [])
+    protected function displayError(string $str, array $content = [])
     {
         Colorize::show('[bg-red][white]' . $str . '[/]');
         $this->displayPerimeterOfCoce($this->getErrorNumberLine($str), $content);
@@ -41,7 +41,7 @@ trait CheckersCommonTrait
      * 
      * @param string $str The phrasal used to be describe the success
      */
-    public function displaySuccess(string $str)
+    protected function displaySuccess(string $str)
     {
         Colorize::show('[green]' . $str . '[/]');
     }
@@ -51,7 +51,7 @@ trait CheckersCommonTrait
      * 
      * @param string $str The phrasal used to be describe a normal message
      */
-    public function displayNormal(string $str)
+    protected function displayNormal(string $str)
     {
         Colorize::show('[blue]' . $str . '[/]');
     }
