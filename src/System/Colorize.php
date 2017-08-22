@@ -49,7 +49,7 @@ class Colorize
     ];
 
     /**
-     * Replace the tag colors of entry string
+     * Replace the color tag of entry string
      * 
      * @param string $msg The message to be formated
      * @return string The message formated 
