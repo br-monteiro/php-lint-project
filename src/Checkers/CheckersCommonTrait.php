@@ -32,7 +32,7 @@ trait CheckersCommonTrait
      */
     protected function displayError(string $str, array $content = [])
     {
-        Colorize::show("[cyan]-----------------------\n"
+        Colorize::show("[cyan]" . Config::STRING_SEPARATOR . "\n"
             . '[bg-red][white]' . $str . '[/]');
         $this->displayPerimeterOfCoce($this->getErrorNumberLine($str), $content);
     }
