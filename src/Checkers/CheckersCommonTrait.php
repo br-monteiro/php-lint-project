@@ -34,7 +34,7 @@ trait CheckersCommonTrait
     {
         Colorize::show("[cyan]" . Config::STRING_SEPARATOR . "\n"
             . '[bg-red][white]' . $str . '[/]');
-        $this->displayPerimeterOfCoce($this->getErrorNumberLine($str), $content);
+        $this->displayPerimeterOfCoce($this->getErrorNumberLine($str) - 1, $content);
     }
 
     /**
@@ -75,7 +75,6 @@ trait CheckersCommonTrait
             return;
         }
 
-        $reference -= 1;
         $referenceToUp = $reference - Config::REACH_DISPLAY;
         $referenceToDown = $reference + Config::REACH_DISPLAY;
 
