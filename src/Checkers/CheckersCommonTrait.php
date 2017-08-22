@@ -32,7 +32,8 @@ trait CheckersCommonTrait
      */
     protected function displayError(string $str, array $content = [])
     {
-        Colorize::show('[bg-red][white]' . $str . '[/]');
+        Colorize::show("[cyan]-----------------------\n"
+            . '[bg-red][white]' . $str . '[/]');
         $this->displayPerimeterOfCoce($this->getErrorNumberLine($str), $content);
     }
 
@@ -89,7 +90,7 @@ trait CheckersCommonTrait
         for ($i = $referenceToUp; $i <= $referenceToDown; $i++) {
 
             if ($i == $reference) {
-                Colorize::show("\n[cyan]" . ($i + 1) . ' [bg-red][white]' . $content[$i] . '[/]');
+                Colorize::show("\n[cyan]" . ($i + 1) . ' [bg-yellow][red]' . $content[$i] . '[/]');
                 continue;
             }
 
