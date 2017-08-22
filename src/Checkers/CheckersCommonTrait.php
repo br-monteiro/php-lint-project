@@ -34,7 +34,7 @@ trait CheckersCommonTrait
     {
         Colorize::show("[cyan]" . Config::STRING_SEPARATOR . "\n"
             . '[bg-red][white]' . $str . '[/]');
-        $this->displayPerimeterOfCoce($this->getErrorNumberLine($str) - 1, $content);
+        $this->displayPerimeterOfCode($this->getErrorNumberLine($str) - 1, $content);
     }
 
     /**
