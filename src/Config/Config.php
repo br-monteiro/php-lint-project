@@ -24,4 +24,9 @@ class Config
      */
     const REACH_DISPLAY = 3;
 
+    /**
+     * String used as separator
+     */
+    const STRING_SEPARATOR = '------------------';
+
 }
