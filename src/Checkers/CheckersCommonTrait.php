@@ -66,7 +66,7 @@ trait CheckersCommonTrait
      * @param array $content Array of lines of the file
      * @return null null
      */
-    protected function displayPerimeterOfCoce(int $reference, array $content)
+    protected function displayPerimeterOfCode(int $reference, array $content)
     {
         $contentLength = count($content);
 
@@ -89,11 +89,11 @@ trait CheckersCommonTrait
         for ($i = $referenceToUp; $i <= $referenceToDown; $i++) {
 
             if ($i == $reference) {
-                Colorize::show("[cyan]" . ($i + 1) . ' [bg-yellow][red]' . trim($content[$i]) . '[/]');
+                Colorize::show("[cyan]" . ($i + 1) . ' [bg-yellow][red]' . $content[$i] . '[/]');
                 continue;
             }
 
-            Colorize::show('[cyan]' . ($i + 1) . ' [yellow]' . trim($content[$i]) . '[/]');
+            Colorize::show('[cyan]' . ($i + 1) . ' [yellow]' . $content[$i] . '[/]');
         }
     }
 }
