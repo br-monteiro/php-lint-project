@@ -88,6 +88,11 @@ trait CheckersCommonTrait
 
         for ($i = $referenceToUp; $i <= $referenceToDown; $i++) {
 
+            /**
+             * Remove new line
+             */
+            $content[$i] = str_replace("\n", '', $content[$i]);
+
             if ($i == $reference) {
                 Colorize::show("[cyan]" . ($i + 1) . ' [bg-yellow][red]' . $content[$i] . '[/]');
                 continue;
