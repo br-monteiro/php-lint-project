@@ -4,8 +4,7 @@ namespace KR04;
 use KR04\Config\Config;
 use KR04\Checkers\Checker;
 use KR04\Files\Loader;
-use KR04\Checkers\SyntaxChecker;
-use KR04\Checkers\TesteChecker;
+use KR04\Checkers\{SyntaxChecker,TesteChecker};
 
 class Linter
 {
