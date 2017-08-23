@@ -5,7 +5,7 @@ use KR04\Checkers\Checker;
 use KR04\Config\Config;
 use KR04\Files\Loader;
 
-class ChaordicPatternChecker extends Checker
+class PsrChecker extends Checker
 {
 
     protected $arrPattern = [];
@@ -21,8 +21,7 @@ class ChaordicPatternChecker extends Checker
         /**
          *  pattern => description
          */
-        $this->arrPattern['/dump\(/'] = '[bg-red][white]Não pode haver [bg-blue]*dump(...)[/]';
-        $this->arrPattern['/\s{5,}/'] = '[bg-red][white]There are much white spaces[/]';
+        $this->arrPattern['/teste/'] = '[bg-red][white]Qualquer outra coisa [bg-blue]teste[/]';
 
         return $this;
     }
@@ -81,7 +80,7 @@ class ChaordicPatternChecker extends Checker
     protected function prepareErrorsForDisplay(array $errors, array $content)
     {
         foreach ($errors as $numberLine => $errorsContent) {
-            
+
             $this->displayNormal(Config::STRING_SEPARATOR . "\n"
                 . $errorsContent . "[bg-red] on line " . ($numberLine + 1) . '[/]');
             $this->displayPerimeterOfCode($numberLine, $content);
