@@ -57,6 +57,8 @@ class Colorize
     private static function colorizeMsg(string $msg): string
     {
         $os = array_key_exists(PHP_OS, self::$colors) ? PHP_OS : 'OTHER';
+        
+        $msg = str_replace('$', '\$', $msg);
 
         foreach (self::$colors[$os] as $key => $value) {
             $msg = str_replace($key, $value, $msg);
