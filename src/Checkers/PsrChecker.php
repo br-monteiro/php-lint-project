@@ -22,9 +22,14 @@ class PsrChecker extends Checker
          *  pattern => description
          */
         // tags PHP
-        $this->arrPattern['/<[?%]{1}\n/'] = "[white][bg-blue]PSR-1 2.1.PHP Tags\n"
-            . "[bg-red]PHP code MUST use the long [bg-blue]<?php ?>[bg-red] tags or the short-echo [bg-blue]<?= ?>[bg-red] tags;\n"
+        $this->arrPattern['/<[?%]{1}\n/'] = "[white][bg-blue]PSR-1 2.1. PHP Tags\n"
+            . "[bg-red]PHP code MUST use the long [bg-blue]<?php ?>[bg-red] tags"
+            . " or the short-echo [bg-blue]<?= ?>[bg-red] tags;\n"
             . "it MUST NOT use the other tag variations.[/]";
+        // Class constants
+        $this->arrPattern['/.*const\s[a-z\d_ ]+/'] = "[white][bg-blue]PSR-1 4.1. Constants\n"
+            . "[bg-red]Class constants MUST be declared in all [bg-blue]upper"
+            . " case[bg-red] with underscore separators.[/]";
 
         return $this;
     }
