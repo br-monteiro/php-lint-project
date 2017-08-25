@@ -102,6 +102,16 @@ class PsrChecker extends Checker
             . " level as the case body. There MUST be a comment such as"
             . " [bg-blue]// no break[bg-red] when fall-through is intentional"
             . " in a non-empty case body.[/]";
+        // while, do while
+        $this->arrPattern['/while(\s?\(.+?\)(\{|\n)|\(.+?\)\s\{)/'] = ""
+            . "[white][bg-blue]5.3. while, do while[/]\n"
+            . "[bg-red]A while statement looks like the following. Note the"
+            . " placement of parentheses, spaces, and braces.[/]";
+        // while, do while
+        $this->arrPattern['/\}while\s?\(.+?\)\;|\swhile\(.+?\)\;/'] = ""
+            . "[white][bg-blue]5.3. while, do while[/]\n"
+            . "[bg-red]Similarly, a do while statement looks like the following."
+            . " Note the placement of parentheses, spaces, and braces.[/]";
 
         return $this;
     }
