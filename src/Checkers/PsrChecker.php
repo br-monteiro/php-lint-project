@@ -117,6 +117,11 @@ class PsrChecker extends Checker
             . "[white][bg-blue]5.4. for[/]\n"
             . "[bg-red]A [bg-blue]for[bg-red] statement looks like the following."
             . " Note the placement of parentheses, spaces, and braces.[/]";
+        // foreach
+        $this->arrPattern['/\bforeach\(.+?\)\s?\{|\bforeach\s\(.+?\)(\n|\{)/'] = ""
+            . "[white][bg-blue]5.5. foreach[/]\n"
+            . "[bg-red]A [bg-blue]foreach[bg-red] statement looks like the"
+            . " following. Note the placement of parentheses, spaces, and braces.[/]";
 
         return $this;
     }
