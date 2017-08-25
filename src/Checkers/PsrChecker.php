@@ -45,6 +45,9 @@ class PsrChecker extends Checker
         $this->arrPattern['/.{121,}\n?/'] = "[white][bg-blue]PSR-2 2.3. Lines[/]\n"
             . "... [bg-red]The soft limit on line length MUST be 120 characters;"
             . " automated style checkers MUST warn but MUST NOT error at the soft limit.[/] ...";
+        // Indenting
+        $this->arrPattern['/.*\t\n?/'] = "[white][bg-blue]PSR-2 2.4. Indenting[/]\n"
+            . "[bg-red]Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting.[/]";
 
         return $this;
     }
