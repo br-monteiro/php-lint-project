@@ -113,7 +113,7 @@ class PsrChecker extends Checker
             . "[bg-red]Similarly, a do while statement looks like the following."
             . " Note the placement of parentheses, spaces, and braces.[/]";
         // for
-        $this->arrPattern['/\bfor\(.+?\{|\bfor\s\(.+?\)\{/'] = ""
+        $this->arrPattern['/\bfor\(.+?\)\s?\{|\bfor\s\(.+?\)(\n|\{)/'] = ""
             . "[white][bg-blue]5.4. for[/]\n"
             . "[bg-red]A [bg-blue]for[bg-red] statement looks like the following."
             . " Note the placement of parentheses, spaces, and braces.[/]";
