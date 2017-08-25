@@ -92,6 +92,16 @@ class PsrChecker extends Checker
             . "[white][bg-blue]5.1. if, elseif, else[/]\n"
             . "[bg-red]The keyword elseif SHOULD be used instead of else if so"
             . " that all control keywords look like single words.[/]";
+        // switch, case
+        $this->arrPattern['/switch\(.+?\)|switch\s\(.+?\)(\{|\n)|case\s.+?\:\s(case|default).*/'] = ""
+            . "[white][bg-blue]5.2. switch, case[/]\n"
+            . "[bg-red]A switch structure looks like the following. Note the"
+            . " placement of parentheses, spaces, and braces. The case statement"
+            . " MUST be indented once from switch, and the break keyword"
+            . " (or other terminating keyword) MUST be indented at the same"
+            . " level as the case body. There MUST be a comment such as"
+            . " [bg-blue]// no break[bg-red] when fall-through is intentional"
+            . " in a non-empty case body.[/]";
 
         return $this;
     }
