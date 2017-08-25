@@ -80,6 +80,18 @@ class PsrChecker extends Checker
             . "[white][bg-blue]4.6. Method and Function Calls[/]\n"
             . "[bg-red]... In the argument list, there MUST NOT be a space"
             . " before each comma, and there MUST be one space after each comma.[/]";
+        // if, elseif, else
+        $this->arrPattern['/(if|elseif)(\s\(.+?\)\{|\(.+?\)\s?\{)|(\}\s?else\{|\}else\s?\{)/'] = ""
+            . "[white][bg-blue]5.1. if, elseif, else[/]\n"
+            . "[bg-red]An if structure looks like the following. Note the"
+            . " placement of parentheses, spaces, and braces; and that else and"
+            . " elseif are on the same line as the closing brace from the"
+            . " earlier body.[/]";
+        // if, elseif, else
+        $this->arrPattern['/\}?\s?else\sif\s?\{?/'] = ""
+            . "[white][bg-blue]5.1. if, elseif, else[/]\n"
+            . "[bg-red]The keyword elseif SHOULD be used instead of else if so"
+            . " that all control keywords look like single words.[/]";
 
         return $this;
     }
