@@ -30,6 +30,14 @@ class PsrChecker extends Checker
         $this->arrPattern['/.*const\s[a-z\d_ ]+/'] = "[white][bg-blue]PSR-1 4.1. Constants\n"
             . "[bg-red]Class constants MUST be declared in all [bg-blue]upper"
             . " case[bg-red] with underscore separators.[/]";
+        // Properties
+        $this->arrPattern['/.*\$(?:[^a-z].+|.*_.*)\b/'] = "[white][bg-blue]PSR-1 4.2. Properties\n"
+            . "[bg-red]This guide intentionally avoids any recommendation"
+            . " regarding the use of \$StudlyCaps, \$camelCase, or \$under_score"
+            . " property names.\n"
+            . "Whatever naming convention is used SHOULD be applied consistently"
+            . " within a reasonable scope. That scope may be vendor-level,"
+            . " package-level, class-level, or method-level.[/]";
 
         return $this;
     }
