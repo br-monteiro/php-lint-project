@@ -61,6 +61,11 @@ class PsrChecker extends Checker
             . "[white][bg-blue]PSR-2 4.2. Properties[/]\n"
             . "[bg-red]Property names SHOULD NOT be prefixed with a"
             . " single underscore to indicate protected or private visibility.[/]";
+        // Methods abstract, final, and static
+        $this->arrPattern['/.*(abstract|final)\s(static|function)+\s/'] = ""
+            . "[white][bg-blue]PSR-2 4.5. abstract, final, and static[/]\n"
+            . "[bg-red]When present, the abstract and final declarations"
+            . " MUST precede the visibility declaration.[/]";
 
         return $this;
     }
