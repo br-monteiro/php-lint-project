@@ -41,6 +41,10 @@ class PsrChecker extends Checker
         // Methods
         $this->arrPattern['/.*function\s(?:[^a-z].+|.*_.*)/'] = "[white][bg-blue]PSR-1 4.3. Methods[/]\n"
             . "[bg-red]Method names MUST be declared in [bg-blue]camelCase().[/]";
+        // Limit on line
+        $this->arrPattern['/.{121,}\n?/'] = "[white][bg-blue]PSR-2 2.3. Lines[/]\n"
+            . "... [bg-red]The soft limit on line length MUST be 120 characters;"
+            . " automated style checkers MUST warn but MUST NOT error at the soft limit.[/] ...";
 
         return $this;
     }
