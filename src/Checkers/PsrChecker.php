@@ -43,11 +43,24 @@ class PsrChecker extends Checker
             . "[bg-red]Method names MUST be declared in [bg-blue]camelCase().[/]";
         // Limit on line
         $this->arrPattern['/.{121,}\n?/'] = "[white][bg-blue]PSR-2 2.3. Lines[/]\n"
-            . "... [bg-red]The soft limit on line length MUST be 120 characters;"
-            . " automated style checkers MUST warn but MUST NOT error at the soft limit.[/] ...";
+            . "[bg-red]The soft limit on line length MUST be 120 characters;"
+            . " automated style checkers MUST warn but MUST NOT error at the soft limit.[/]";
         // Indenting
         $this->arrPattern['/.*\t\n?/'] = "[white][bg-blue]PSR-2 2.4. Indenting[/]\n"
             . "[bg-red]Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting.[/]";
+        // Properties
+        $this->arrPattern['/.+(public|protected|private)\s\$\w+[= ]{1,3}.+?;\s(public|protected|private)?\s\$\w+[= ]{1,3}.+/'] = ""
+            . "[white][bg-blue]PSR-2 4.2. Properties[/]\n"
+            . "[bg-red]There MUST NOT be more than one property declared per statement.[/]";
+        // Properties
+        $this->arrPattern['/.+?var\s\$\w+.+/'] = ""
+            . "[white][bg-blue]PSR-2 4.2. Properties[/]\n"
+            . "[bg-red]The var keyword MUST NOT be used to declare a property.[/]";
+        // Properties
+        $this->arrPattern['/.+(protected|private)\s\$_\w+[= ]{1,3}.+?;/'] = ""
+            . "[white][bg-blue]PSR-2 4.2. Properties[/]\n"
+            . "[bg-red]Property names SHOULD NOT be prefixed with a"
+            . " single underscore to indicate protected or private visibility.[/]";
 
         return $this;
     }
