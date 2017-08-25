@@ -105,13 +105,11 @@ class PsrChecker extends Checker
         // while, do while
         $this->arrPattern['/while(\s?\(.+?\)(\{|\n)|\(.+?\)\s\{)/'] = ""
             . "[white][bg-blue]5.3. while, do while[/]\n"
-            . "[bg-red]A while statement looks like the following. Note the"
-            . " placement of parentheses, spaces, and braces.[/]";
+            . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
         // while, do while
         $this->arrPattern['/\}while\s?\(.+?\)\;|\swhile\(.+?\)\;/'] = ""
             . "[white][bg-blue]5.3. while, do while[/]\n"
-            . "[bg-red]Similarly, a do while statement looks like the following."
-            . " Note the placement of parentheses, spaces, and braces.[/]";
+            . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
         // for
         $this->arrPattern['/\bfor\(.+?\)\s?\{|\bfor\s\(.+?\)(\n|\{)/'] = ""
             . "[white][bg-blue]5.4. for[/]\n"
