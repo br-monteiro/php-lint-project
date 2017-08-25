@@ -66,6 +66,20 @@ class PsrChecker extends Checker
             . "[white][bg-blue]PSR-2 4.5. abstract, final, and static[/]\n"
             . "[bg-red]When present, the abstract and final declarations"
             . " MUST precede the visibility declaration.[/]";
+        // Method and Function Calls
+        $this->arrPattern['/.*\$?.+?\([ \t\r\v\f].*\s?|.*[ \t\r\v\f]+\)/'] = ""
+            . "[white][bg-blue]4.6. Method and Function Calls[/]\n"
+            . "[bg-red]When making a method or function call, there MUST NOT be"
+            . " a space between the method or function name and the opening"
+            . " parenthesis, there MUST NOT be a space after the opening"
+            . " parenthesis, and there MUST NOT be a space before the closing"
+            . " parenthesis. In the argument list, there MUST NOT be a space"
+            . " before each comma, and there MUST be one space after each comma.[/]";
+        // Method and Function Calls
+        $this->arrPattern['/.*\w+\(.*\s,\s.*/'] = ""
+            . "[white][bg-blue]4.6. Method and Function Calls[/]\n"
+            . "[bg-red]... In the argument list, there MUST NOT be a space"
+            . " before each comma, and there MUST be one space after each comma.[/]";
 
         return $this;
     }
