@@ -68,7 +68,7 @@ class PsrChecker extends Checker
             . " MUST precede the visibility declaration.[/]";
         // Method and Function Calls
         $this->arrPattern['/.*\$?.+?\([ \t\r\v\f].*\s?|.*[ \t\r\v\f]+\)/'] = ""
-            . "[white][bg-blue]4.6. Method and Function Calls[/]\n"
+            . "[white][bg-blue]PSR-2 4.6. Method and Function Calls[/]\n"
             . "[bg-red]When making a method or function call, there MUST NOT be"
             . " a space between the method or function name and the opening"
             . " parenthesis, there MUST NOT be a space after the opening"
@@ -77,24 +77,24 @@ class PsrChecker extends Checker
             . " before each comma, and there MUST be one space after each comma.[/]";
         // Method and Function Calls
         $this->arrPattern['/.*\w+\(.*\s,\s.*/'] = ""
-            . "[white][bg-blue]4.6. Method and Function Calls[/]\n"
+            . "[white][bg-blue]PSR-2 4.6. Method and Function Calls[/]\n"
             . "[bg-red]... In the argument list, there MUST NOT be a space"
             . " before each comma, and there MUST be one space after each comma.[/]";
         // if, elseif, else
         $this->arrPattern['/(if|elseif)(\s\(.+?\)\{|\(.+?\)\s?\{)|(\}\s?else\{|\}else\s?\{)/'] = ""
-            . "[white][bg-blue]5.1. if, elseif, else[/]\n"
+            . "[white][bg-blue]PSR-2 5.1. if, elseif, else[/]\n"
             . "[bg-red]An if structure looks like the following. Note the"
             . " placement of parentheses, spaces, and braces; and that else and"
             . " elseif are on the same line as the closing brace from the"
             . " earlier body.[/]";
         // if, elseif, else
         $this->arrPattern['/\}?\s?else\sif\s?\{?/'] = ""
-            . "[white][bg-blue]5.1. if, elseif, else[/]\n"
+            . "[white][bg-blue]PSR-2 5.1. if, elseif, else[/]\n"
             . "[bg-red]The keyword elseif SHOULD be used instead of else if so"
             . " that all control keywords look like single words.[/]";
         // switch, case
         $this->arrPattern['/switch\(.+?\)|switch\s\(.+?\)(\{|\n)|case\s.+?\:\s(case|default).*/'] = ""
-            . "[white][bg-blue]5.2. switch, case[/]\n"
+            . "[white][bg-blue]PSR-2 5.2. switch, case[/]\n"
             . "[bg-red]A switch structure looks like the following. Note the"
             . " placement of parentheses, spaces, and braces. The case statement"
             . " MUST be indented once from switch, and the break keyword"
@@ -104,23 +104,23 @@ class PsrChecker extends Checker
             . " in a non-empty case body.[/]";
         // while, do while
         $this->arrPattern['/while(\s?\(.+?\)(\{|\n)|\(.+?\)\s\{)/'] = ""
-            . "[white][bg-blue]5.3. while, do while[/]\n"
+            . "[white][bg-blue]PSR-2 5.3. while, do while[/]\n"
             . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
         // while, do while
         $this->arrPattern['/\}while\s?\(.+?\)\;|\swhile\(.+?\)\;/'] = ""
-            . "[white][bg-blue]5.3. while, do while[/]\n"
+            . "[white][bg-blue]PSR-2 5.3. while, do while[/]\n"
             . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
         // for
         $this->arrPattern['/\bfor\(.+?\)\s?\{|\bfor\s\(.+?\)(\n|\{)/'] = ""
-            . "[white][bg-blue]5.4. for[/]\n"
+            . "[white][bg-blue]PSR-2 5.4. for[/]\n"
             . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
         // foreach
         $this->arrPattern['/\bforeach\(.+?\)\s?\{|\bforeach\s\(.+?\)(\n|\{)/'] = ""
-            . "[white][bg-blue]5.5. foreach[/]\n"
+            . "[white][bg-blue]PSR-2 5.5. foreach[/]\n"
             . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
         // try, catch
         $this->arrPattern['/(\}?catch\(.+?\)\s?(\{|\n))|(\}?catch\s?\(.+?\)(\{|\n))|(\}catch\s\(.+?\)\s(\{|\n))/'] = ""
-            . "[white][bg-blue]5.6. try, catch[/]\n"
+            . "[white][bg-blue]PSR-2 5.6. try, catch[/]\n"
             . "[bg-red]Note the placement of parentheses, spaces, and braces.[/]";
 
         return $this;
