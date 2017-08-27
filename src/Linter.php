@@ -4,7 +4,12 @@ namespace KR04;
 use KR04\Config\Config;
 use KR04\Checkers\Checker;
 use KR04\Files\Loader;
-use KR04\Checkers\{SyntaxChecker, ChaordicPatternChecker, PsrChecker, TesteChecker};
+use KR04\Checkers\{
+    SyntaxChecker,
+    ChaordicPatternChecker,
+    PsrChecker,
+    TesteChecker
+};
 
 class Linter
 {
@@ -20,6 +25,9 @@ class Linter
             ->runChecker();
     }
 
+    /**
+     * Run the checkers
+     */
     private function runChecker()
     {
         foreach ($this->arrCheckers as $checker) {
@@ -27,6 +35,11 @@ class Linter
         }
     }
 
+    /**
+     * Configure the linter with Checkers
+     * 
+     * @return \KR04\Linter
+     */
     private function configure(): Linter
     {
         $this->registerChecker(new SyntaxChecker($this->loader))
@@ -37,6 +50,12 @@ class Linter
         return $this;
     }
 
+    /**
+     * Register a new checker to be executed
+     * 
+     * @param Checker $cheker
+     * @return \KR04\Linter
+     */
     private function registerChecker(Checker $cheker): Linter
     {
         $this->arrCheckers[] = $cheker;
