@@ -24,7 +24,7 @@ class ChaordicPatternChecker extends PsrChecker
          *  pattern => description
          */
         $this->arrPattern['/dump\(/'] = '[bg-red][white]Não pode haver [bg-blue]*dump(...)[/]';
-        $this->arrPattern['/\s{5,}\n/'] = '[bg-red][white]There are much white spaces[/]';
+        $this->arrPattern['/\s{5,}\n/'] = '[bg-red][white]There are much whitespaces[/]';
 
         return $this;
     }
