@@ -142,7 +142,7 @@ class PsrChecker extends Checker
             }
 
             if (!empty($this->arrErrorsDetected)) {
-                $this->displayNormal('Verifing file [bg-white]' . $path);
+                $this->displayNormal('[bg-blue][white]Verifying file [bg-white][blue]' . $path);
                 $this->prepareErrorsForDisplay($this->arrErrorsDetected, $content['array']);
             }
         }
