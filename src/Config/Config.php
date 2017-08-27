@@ -15,6 +15,20 @@ class Config
     const ROOT_DIRECTORY = 'filesTest' . self::DS;
 
     /**
+     * List of skipped directories
+     *
+     * Fill with relative path
+     */
+    const IGNORE_DIRECTORY = [];
+
+    /**
+     * List of skipped files
+     *
+     * Fill with relative path
+     */
+    const IGNORE_FILE = [];
+
+    /**
      * Extensions considered for the application
      */
     const ALLOWED_EXTENSION = ['php'];

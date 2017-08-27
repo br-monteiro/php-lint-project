@@ -29,6 +29,14 @@ class Loader
 
         foreach ($this->iterator as $info) {
 
+            if ($this->isIgnoringDirectory($info->getPathname())) {
+                continue;
+            }
+
+            if ($this->isIgnoringFile($info->getPathname())) {
+                continue;
+            }
+
             $keys = $this->extractPatternArrayKeys($info->getPathname());
 
             if (!$keys) {
@@ -105,14 +113,46 @@ class Loader
             ], true);
     }
 
-    private function isReadable($name): bool
+    private function isReadable(string $name): bool
     {
         return (bool) !array_search($name, $this->notRead);
     }
 
-    private function isValidExtension($name): bool
+    private function isValidExtension(string $name): bool
     {
         $extension = explode('.', $name);
         return array_search(trim(end($extension)), Config::ALLOWED_EXTENSION) !== false;
+    }
+
+    private function isIgnoringDirectory(string $path): bool
+    {
+        if (count(Config::IGNORE_DIRECTORY) == 0) {
+            return false;
+        }
+
+        foreach (Config::IGNORE_DIRECTORY as $dirname) {
+
+            if (strstr($path, $dirname)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isIgnoringFile(string $path): bool
+    {
+        if (count(Config::IGNORE_FILE) == 0 || !is_file($path)) {
+            return false;
+        }
+
+        foreach (Config::IGNORE_FILE as $filename) {
+
+            if (strstr($path, $filename)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
