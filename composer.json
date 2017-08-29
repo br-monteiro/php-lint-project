@@ -1,10 +1,10 @@
 {
-    "name":"phbsis/php-lint-project",
+    "name":"phbsis/kr04-php-lint",
     "description":"The OKR's Project! #KR04",
     "homepage": "https://github.com/br-monteiro/php-lint-project",
     "type": "project",
     "license": "GNU",
-    "minimum-stability": "dev",
+    "minimum-stability": "v0.1",
     "authors": [
         {
             "name": "Edson B. S. Monteiro",
