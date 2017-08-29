@@ -10,6 +10,7 @@ class PsrChecker extends Checker
 
     protected $arrPattern = [];
     protected $arrErrorsDetected = [];
+    protected $ignore = false;
 
     public function __construct(Loader $loader)
     {
@@ -31,20 +32,20 @@ class PsrChecker extends Checker
             . "[bg-red]Class constants MUST be declared in all [bg-blue]upper"
             . " case[bg-red] with underscore separators.[/]";
         // Properties
-        $this->arrPattern['/.*\$(?:[^a-z].+|.*_.*)\b/'] = "[white][bg-blue]PSR-1 4.2. Properties[/]\n"
-            . "[bg-red]This guide intentionally avoids any recommendation"
-            . " regarding the use of \$StudlyCaps, \$camelCase, or \$under_score"
-            . " property names.\n"
-            . "Whatever naming convention is used SHOULD be applied consistently"
-            . " within a reasonable scope. That scope may be vendor-level,"
-            . " package-level, class-level, or method-level.[/]";
+        //$this->arrPattern['/.*\$([^a-z_].+?(-\>|\s=\s)|.{2,}_.*?(-\>|\s=\s))/'] = "[white][bg-blue]PSR-1 4.2. Properties[/]\n"
+        //    . "[bg-red]This guide intentionally avoids any recommendation"
+        //    . " regarding the use of \$StudlyCaps, \$camelCase, or \$under_score"
+        //    . " property names.\n"
+        //    . "Whatever naming convention is used SHOULD be applied consistently"
+        //    . " within a reasonable scope. That scope may be vendor-level,"
+        //    . " package-level, class-level, or method-level.[/]";
         // Methods
-        $this->arrPattern['/.*function\s(?:[^a-z].+|.*_.*)/'] = "[white][bg-blue]PSR-1 4.3. Methods[/]\n"
+        $this->arrPattern['/function\s(?:[^a-z].+|.*_.*)\(.*/'] = "[white][bg-blue]PSR-1 4.3. Methods[/]\n"
             . "[bg-red]Method names MUST be declared in [bg-blue]camelCase().[/]";
         // Limit on line
-        $this->arrPattern['/.{121,}\n?/'] = "[white][bg-blue]PSR-2 2.3. Lines[/]\n"
-            . "[bg-red]The soft limit on line length MUST be 120 characters;"
-            . " automated style checkers MUST warn but MUST NOT error at the soft limit.[/]";
+        //$this->arrPattern['/.{121,}\n?/'] = "[white][bg-blue]PSR-2 2.3. Lines[/]\n"
+        //    . "[bg-red]The soft limit on line length MUST be 120 characters;"
+        //    . " automated style checkers MUST warn but MUST NOT error at the soft limit.[/]";
         // Indenting
         $this->arrPattern['/.*\t\n?/'] = "[white][bg-blue]PSR-2 2.4. Indenting[/]\n"
             . "[bg-red]Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting.[/]";
@@ -134,6 +135,10 @@ class PsrChecker extends Checker
 
             foreach ($content['array'] as $referenceLine => $contentLine) {
 
+                if ($this->ignoreLine($contentLine)) {
+                    continue;
+                }
+
                 $errorsDetected = $this->checkPattern($contentLine);
 
                 if ($errorsDetected) {
@@ -185,5 +190,26 @@ class PsrChecker extends Checker
                 . $errorsContent . "[bg-red] on line " . ($numberLine + 1) . '[/]');
             $this->displayPerimeterOfCode($numberLine, $content);
         }
+    }
+
+    /**
+     * Verifying if the line contains the IGNORE tag
+     *
+     * @param string $str Line of file
+     * @return bool
+     */
+    protected function ignoreLine(string $str): bool
+    {
+        if (!$this->ignore && strstr($str, Config::IGNORE) !== false) {
+            $this->ignore = true;
+            return true;
+        }
+
+        if ($this->ignore && strstr($str, Config::END_IGNORE) !== false) {
+            $this->ignore = false;
+            return false;
+        }
+
+        return $this->ignore;
     }
 }
