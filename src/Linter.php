@@ -44,8 +44,8 @@ class Linter
     {
         $this->registerChecker(new SyntaxChecker($this->loader))
             ->registerChecker(new PsrChecker($this->loader))
-            ->registerChecker(new ChaordicPatternChecker($this->loader))
-            ->registerChecker(new TesteChecker($this->loader));
+            ->registerChecker(new ChaordicPatternChecker($this->loader));
+            //->registerChecker(new TesteChecker($this->loader));
 
         return $this;
     }
