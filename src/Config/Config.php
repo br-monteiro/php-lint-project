@@ -43,4 +43,14 @@ class Config
      */
     const STRING_SEPARATOR = '------------------';
 
+    /**
+     * Tag used to start the ignore block code
+     */
+    const IGNORE = '@ignore';
+
+    /**
+     * Tag used to ending the ignore block code
+     */
+    const END_IGNORE = '@endignore';
+
 }
