@@ -12,7 +12,7 @@ class Config
     /**
      * Directory of entry to scout
      */
-    const ROOT_DIRECTORY = self::DS;
+    const ROOT_DIRECTORY = '.' . self::DS;
 
     /**
      * List of skipped directories
