@@ -68,7 +68,7 @@ class PsrChecker extends Checker
             . "[bg-red]When present, the abstract and final declarations"
             . " MUST precede the visibility declaration.[/]";
         // Method and Function Calls
-        $this->arrPattern['/.*\$?.+?\([ \t\r\v\f].*\s?|.*[ \t\r\v\f]+\)/'] = ""
+        $this->arrPattern['/\$?(\w+\([ \t]+.*?[);]?|\w+\(.*?[ ]\);)/'] = ""
             . "[white][bg-blue]PSR-2 4.6. Method and Function Calls[/]\n"
             . "[bg-red]When making a method or function call, there MUST NOT be"
             . " a space between the method or function name and the opening"
