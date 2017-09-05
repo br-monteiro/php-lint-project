@@ -44,6 +44,11 @@ class Config
     const STRING_SEPARATOR = '------------------';
 
     /**
+     * Tag used to ignore only line
+     */
+    const IGNORE_LINE = '@ignoreline';
+
+    /**
      * Tag used to start the ignore block code
      */
     const IGNORE = '@ignore';
