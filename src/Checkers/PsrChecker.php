@@ -40,8 +40,21 @@ class PsrChecker extends Checker
         //    . " within a reasonable scope. That scope may be vendor-level,"
         //    . " package-level, class-level, or method-level.[/]";
         // Methods
-        $this->arrPattern['/function\s(?:[^a-z].+|.*_.*)\(.*/'] = "[white][bg-blue]PSR-1 4.3. Methods[/]\n"
-            . "[bg-red]Method names MUST be declared in [bg-blue]camelCase().[/]";
+        $this->arrPattern['/function\s(A-Z|[^a-z][^_]\w+)|function\s([a-z]+_\w+)/'] = [
+            'message' => "[white][bg-blue]PSR-1 4.3. Methods[/]\n"
+            . "[bg-red]Method names MUST be declared in [bg-blue]camelCase().[/]",
+            // callback
+            'function' => function($matches, $details, $str) {
+                // verify if the function is native
+                if (is_array($matches) && isset($matches[2]) && !function_exists($matches[2])) {
+                    return $details;
+                }
+
+                // return empty array
+                return [];
+            }
+        ];
+
         // Limit on line
         //$this->arrPattern['/.{121,}\n?/'] = "[white][bg-blue]PSR-2 2.3. Lines[/]\n"
         //    . "[bg-red]The soft limit on line length MUST be 120 characters;"
@@ -167,9 +180,22 @@ class PsrChecker extends Checker
     {
         $arrErros = [];
 
-        foreach ($this->arrPattern as $pattern => $description) {
-            if (preg_match($pattern, $str)) {
-                $arrErros[] = $description;
+        foreach ($this->arrPattern as $pattern => $details) {
+            $matches = null;
+            $reternCallback = null;
+            $regex = (bool) preg_match($pattern, $str, $matches);
+
+            if ($regex && is_array($details) && isset($details['function']) && is_callable($details['function'])) {
+                $reternCallback = $details['function']($matches, $details, $str);
+            }
+
+            if ($regex && is_array($details) && $reternCallback && isset($reternCallback['message'])) {
+                //The callback return the message
+                $arrErros[] = $reternCallback['message'];
+            }
+
+            if ($regex && is_string($details)) {
+                $arrErros[] = $details;
             }
         }
 
@@ -200,6 +226,10 @@ class PsrChecker extends Checker
      */
     protected function ignoreLine(string $str): bool
     {
+        if (strstr($str, Config::IGNORE_LINE) !== false) {
+            return true;
+        }
+
         if (!$this->ignore && strstr($str, Config::IGNORE) !== false) {
             $this->ignore = true;
             return true;
