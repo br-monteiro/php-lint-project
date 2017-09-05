@@ -1,6 +1,6 @@
 {
-    "name":"phbsis/kr04-php-lint",
-    "description":"The OKR's Project! #KR04",
+    "name": "phbsis/kr04-php-lint",
+    "description": "The OKR's Project! #KR04",
     "homepage": "https://github.com/br-monteiro/php-lint-project",
     "type": "library",
     "license": "GNU",
@@ -19,7 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "KR04\\" : "src/"
+            "KR04\\": "src/"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "php -r \"copy('vendor/phbsis/kr04-php-lint/checker-kr04', 'checker-kr04');\""
+        ]
     }
 }
