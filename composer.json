@@ -25,6 +25,9 @@
     "scripts": {
         "post-install-cmd": [
             "php -r \"copy('vendor/phbsis/kr04-php-lint/checker-kr04', 'checker-kr04');\""
+        ],
+        "post-update-cmd": [
+            "php -r \"copy('vendor/phbsis/kr04-php-lint/checker-kr04', 'checker-kr04');\""
         ]
     }
 }
