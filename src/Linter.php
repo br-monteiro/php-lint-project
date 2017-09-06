@@ -7,8 +7,7 @@ use KR04\Files\Loader;
 use KR04\Checkers\{
     SyntaxChecker,
     ChaordicPatternChecker,
-    PsrChecker,
-    TesteChecker
+    PsrChecker
 };
 
 class Linter
@@ -45,7 +44,6 @@ class Linter
         $this->registerChecker(new SyntaxChecker($this->loader))
             ->registerChecker(new PsrChecker($this->loader))
             ->registerChecker(new ChaordicPatternChecker($this->loader));
-            //->registerChecker(new TesteChecker($this->loader));
 
         return $this;
     }

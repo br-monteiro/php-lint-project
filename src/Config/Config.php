@@ -19,14 +19,32 @@ class Config
      *
      * Fill with relative path
      */
-    const IGNORE_DIRECTORY = [];
+    const IGNORE_DIRECTORY = [
+        self::ROOT_DIRECTORY . '_libs/',
+        self::ROOT_DIRECTORY . 'api/',
+        self::ROOT_DIRECTORY . 'css/',
+        self::ROOT_DIRECTORY . 'images/',
+        self::ROOT_DIRECTORY . 'js/',
+        self::ROOT_DIRECTORY . 'mobile/',
+        self::ROOT_DIRECTORY . 'scripts/',
+        self::ROOT_DIRECTORY . 'tmp/',
+        self::ROOT_DIRECTORY . 'vendor/',
+        self::ROOT_DIRECTORY . 'views/'
+    ];
 
     /**
      * List of skipped files
      *
      * Fill with relative path
      */
-    const IGNORE_FILE = [];
+    const IGNORE_FILE = [
+        self::ROOT_DIRECTORY . 'header-desktop.php',
+        self::ROOT_DIRECTORY . 'template.php',
+        self::ROOT_DIRECTORY . 'neemu-pages.php',
+        self::ROOT_DIRECTORY . 'verify.php',
+        self::ROOT_DIRECTORY . 'footer-desktop.php',
+        self::ROOT_DIRECTORY . 'not-found.php'
+    ];
 
     /**
      * Extensions considered for the application
