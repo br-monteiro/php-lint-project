@@ -3,9 +3,8 @@ namespace KR04\Checkers;
 
 use KR04\Files\Loader;
 use KR04\Checkers\Checker;
-use KR04\Checkers\PsrChecker;
 
-class ChaordicPatternChecker extends PsrChecker
+class ChaordicPatternChecker extends Checker
 {
 
     public function __construct(Loader $loader)
@@ -26,12 +25,6 @@ class ChaordicPatternChecker extends PsrChecker
         $this->arrPattern['/dump\(/'] = '[bg-red][white]Não pode haver [bg-blue]*dump(...)[/]';
         $this->arrPattern['/\s{5,}\n/'] = '[bg-red][white]There are much whitespaces[/]';
 
-        return $this;
-    }
-
-    protected function check(): Checker
-    {
-        parent::check();
         return $this;
     }
 }
