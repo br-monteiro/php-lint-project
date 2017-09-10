@@ -4,60 +4,40 @@ namespace KR04;
 use KR04\Config\Config;
 use KR04\Checkers\Checker;
 use KR04\Files\Loader;
-use KR04\Checkers\{
-    SyntaxChecker,
-    ChaordicPatternChecker,
-    PsrChecker
-};
+use KR04\Checkers\CheckerContainer;
+use KR04\Exceptions\InvalidClassException;
 
 class Linter
 {
 
     private $loader;
-    private $arrCheckers = [];
 
-    public function __construct($path = null)
+    public function __construct(CheckerContainer $checkers)
     {
-        $this->loader = new Loader($path ?: Config::ROOT_DIRECTORY);
+        $this->loader = new Loader(Config::ROOT_DIRECTORY);
 
-        $this->configure()
-            ->runChecker();
+        $this->runChecker($checkers);
     }
 
     /**
      * Run the checkers
+     * 
+     * @param CheckerContainer $checkers
+     * @throws InvalidClassException
      */
-    private function runChecker()
+    private function runChecker(CheckerContainer $checkers)
     {
-        foreach ($this->arrCheckers as $checker) {
-            $checker->run();
+        foreach ($checkers->getChecker() as $checkerStr) {
+
+            $checker = new $checkerStr($this->loader);
+
+            if ($checker instanceof Checker) {
+
+                $checker->run();
+                continue;
+            }
+
+            throw new InvalidClassException("The Class {$checkerStr} is not a valid Checker.");
         }
-    }
-
-    /**
-     * Configure the linter with Checkers
-     * 
-     * @return \KR04\Linter
-     */
-    private function configure(): Linter
-    {
-        $this->registerChecker(new SyntaxChecker($this->loader))
-            ->registerChecker(new PsrChecker($this->loader))
-            ->registerChecker(new ChaordicPatternChecker($this->loader));
-
-        return $this;
-    }
-
-    /**
-     * Register a new checker to be executed
-     * 
-     * @param Checker $cheker
-     * @return \KR04\Linter
-     */
-    private function registerChecker(Checker $cheker): Linter
-    {
-        $this->arrCheckers[] = $cheker;
-
-        return $this;
     }
 }
