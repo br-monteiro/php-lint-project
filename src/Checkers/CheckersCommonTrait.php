@@ -92,6 +92,7 @@ trait CheckersCommonTrait
              * Remove new line
              */
             $content[$i] = str_replace("\n", '', $content[$i]);
+            $content[$i] = str_replace('$', '\$', $content[$i]);
 
             if ($i == $reference) {
                 Colorize::show("[cyan]" . ($i + 1) . ' [bg-yellow][red]' . $content[$i] . '[/]');
