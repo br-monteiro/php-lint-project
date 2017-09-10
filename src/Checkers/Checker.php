@@ -10,6 +10,7 @@ abstract class Checker
     use CheckersCommonTrait;
 
     protected $loader;
+    protected $ignore = false;
 
     public function __construct(Loader $loader)
     {

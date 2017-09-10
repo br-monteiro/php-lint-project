@@ -9,7 +9,6 @@ class PsrChecker extends Checker
 
     protected $arrPattern = [];
     protected $arrErrorsDetected = [];
-    protected $ignore = false;
 
     public function __construct(Loader $loader)
     {
