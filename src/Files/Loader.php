@@ -27,7 +27,7 @@ class Loader
     public function __construct(string $path)
     {
         if (!file_exists($path)) {
-            throw new LoaderFileException("O Diretório {$path} não pode ser encontrado.");
+            throw new LoaderFileException("The {$path} directory couldn't be loaded.");
         }
 
         $directory = new \RecursiveDirectoryIterator($path);
@@ -143,7 +143,7 @@ class Loader
     private function loadFile(string $filename)
     {
         if (!file_exists($filename)) {
-            throw new LoaderFileException("O path {$filename} não pode ser acessado.");
+            throw new LoaderFileException("The {$filename} file couldn't be loaded.");
         }
 
         if (!is_file($filename)) {
