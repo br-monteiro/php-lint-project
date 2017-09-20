@@ -20,7 +20,7 @@
     "autoload": {
         "psr-4": {
             "KR04\\": "src/",
-            "KR04\\Checkers\\": ["src/Checkers/", "checkers/"]
+            "KR04\\Checkers\\": ["src/Checkers/", "/../../../checkers/"]
         }
     },
     "scripts": {
