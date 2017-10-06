@@ -18,7 +18,7 @@ abstract class Checker
         $this->configure();
     }
 
-    abstract protected function configure(): Checker;
+    abstract protected function configure();
 
     /**
      * This method can be used as Middleware before run check
@@ -28,7 +28,7 @@ abstract class Checker
         $this->check();
     }
 
-    protected function check(): Checker
+    protected function check()
     {
         foreach ($this->loader->getOutput() as $path => $content) {
 
@@ -64,7 +64,7 @@ abstract class Checker
      * @param string $str Line to be verified with Regular Expression
      * @return false|string
      */
-    protected function checkPattern(string $str)
+    protected function checkPattern($str)
     {
         $arrErros = [];
 
@@ -112,7 +112,7 @@ abstract class Checker
      * @param string $str Line of file
      * @return bool
      */
-    protected function ignoreLine(string $str): bool
+    protected function ignoreLine($str)
     {
         if (strstr($str, Config::IGNORE_LINE) !== false) {
             return true;

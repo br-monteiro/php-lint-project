@@ -24,7 +24,12 @@ class Loader
      */
     private $iterator;
 
-    public function __construct(string $path)
+    /**
+     * @var KR04\Config\Config
+     */
+    private $config;
+
+    public function __construct($path)
     {
         if (!file_exists($path)) {
             throw new LoaderFileException("The {$path} directory couldn't be loaded.");
@@ -32,6 +37,7 @@ class Loader
 
         $directory = new \RecursiveDirectoryIterator($path);
         $this->iterator = new \RecursiveIteratorIterator($directory);
+        $this->config = new Config();
 
         $this->scoutDirectory();
     }
@@ -79,7 +85,7 @@ class Loader
      * @param string $only
      * @return array Content of files
      */
-    public function getOutput(string $only = null)
+    public function getOutput($only = null)
     {
         if ($only && array_key_exists($only, $this->output)) {
 
@@ -98,7 +104,7 @@ class Loader
      * @param string $path Path the file
      * @return boolean|string
      */
-    private function extractPatternArrayKeys(string $path)
+    private function extractPatternArrayKeys($path)
     {
         $arrPathExploded = $path;
 
@@ -140,7 +146,7 @@ class Loader
      * @return boolean|string
      * @throws LoaderFileException
      */
-    private function loadFile(string $filename)
+    private function loadFile($filename)
     {
         if (!file_exists($filename)) {
             throw new LoaderFileException("The {$filename} file couldn't be loaded.");
@@ -162,7 +168,7 @@ class Loader
      * @param string $name Name of the file or directory
      * @return bool
      */
-    private function isReadable(string $name): bool
+    private function isReadable($name)
     {
         return (bool) !array_search($name, $this->notRead);
     }
@@ -173,10 +179,10 @@ class Loader
      * @param string $name Name of de file
      * @return bool
      */
-    private function isValidExtension(string $name): bool
+    private function isValidExtension($name)
     {
         $extension = explode('.', $name);
-        return array_search(trim(end($extension)), Config::ALLOWED_EXTENSION) !== false;
+        return array_search(trim(end($extension)), $this->config->getAllowedExtension()) !== false;
     }
 
     /**
@@ -185,13 +191,15 @@ class Loader
      * @param string $path
      * @return bool
      */
-    private function isIgnoringDirectory(string $path): bool
+    private function isIgnoringDirectory($path)
     {
-        if (count(Config::IGNORE_DIRECTORY) == 0) {
+        $arrIgnoreDirectory = $this->config->getIgnoreDirectory();
+
+        if (count($arrIgnoreDirectory) == 0) {
             return false;
         }
 
-        foreach (Config::IGNORE_DIRECTORY as $dirname) {
+        foreach ($arrIgnoreDirectory as $dirname) {
 
             if (strstr($path, $dirname)) {
                 return true;
@@ -207,13 +215,15 @@ class Loader
      * @param string $path
      * @return bool
      */
-    private function isIgnoringFile(string $path): bool
+    private function isIgnoringFile($path)
     {
-        if (count(Config::IGNORE_FILE) == 0 || !is_file($path)) {
+        $arrIgnoreFile = $this->config->getIgnoreFile();
+
+        if (count($arrIgnoreFile) == 0 || !is_file($path)) {
             return false;
         }
 
-        foreach (Config::IGNORE_FILE as $filename) {
+        foreach ($arrIgnoreFile as $filename) {
 
             if (strstr($path, $filename)) {
                 return true;

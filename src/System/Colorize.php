@@ -54,7 +54,7 @@ class Colorize
      * @param string $msg The message to be formated
      * @return string The message formated 
      */
-    private static function colorizeMsg(string $msg): string
+    private static function colorizeMsg($msg)
     {
         $os = array_key_exists(PHP_OS, self::$colors) ? PHP_OS : 'OTHER';
 
@@ -73,7 +73,7 @@ class Colorize
      * @param string $str The string to be formated
      * @return string The string formated
      */
-    public static function color(string $str): string
+    public static function color($str)
     {
         // remove especial character if the OS is not Linux
         if (PHP_OS != "Linux") {
@@ -90,7 +90,7 @@ class Colorize
      * @param string $str The string to be removed removed especial char
      * @return string The string formated
      */
-    protected static function removeEspecialChar(string $str): string
+    protected static function removeEspecialChar($str)
     {
         $arrCharacter = [
             '/[áàãâä]/ui' => 'a',
@@ -119,7 +119,7 @@ class Colorize
      * 
      * @param string $str The string to be print
      */
-    static public function show(string $str)
+    static public function show($str)
     {
         system("echo \"" . self::color($str) . "\"");
     }

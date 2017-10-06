@@ -12,44 +12,26 @@ class Config
     /**
      * Directory of entry to scout
      */
-    const ROOT_DIRECTORY = '.' . self::DS;
+    private $rootDirectory = '.' . Config::DS;
 
     /**
      * List of skipped directories
      *
      * Fill with relative path
      */
-    const IGNORE_DIRECTORY = [
-        self::ROOT_DIRECTORY . '_libs/',
-        self::ROOT_DIRECTORY . 'api/',
-        self::ROOT_DIRECTORY . 'css/',
-        self::ROOT_DIRECTORY . 'images/',
-        self::ROOT_DIRECTORY . 'js/',
-        self::ROOT_DIRECTORY . 'mobile/',
-        self::ROOT_DIRECTORY . 'scripts/',
-        self::ROOT_DIRECTORY . 'tmp/',
-        self::ROOT_DIRECTORY . 'vendor/',
-        self::ROOT_DIRECTORY . 'views/'
-    ];
+    private $ignoreDirectory = [];
 
     /**
      * List of skipped files
      *
      * Fill with relative path
      */
-    const IGNORE_FILE = [
-        self::ROOT_DIRECTORY . 'header-desktop.php',
-        self::ROOT_DIRECTORY . 'template.php',
-        self::ROOT_DIRECTORY . 'neemu-pages.php',
-        self::ROOT_DIRECTORY . 'verify.php',
-        self::ROOT_DIRECTORY . 'footer-desktop.php',
-        self::ROOT_DIRECTORY . 'not-found.php'
-    ];
+    private $ignoreFile = [];
 
     /**
      * Extensions considered for the application
      */
-    const ALLOWED_EXTENSION = ['php'];
+    private $allowedExtension = [];
 
     /**
      * Reach to be shown in bugs
@@ -76,4 +58,54 @@ class Config
      */
     const END_IGNORE = '@endignore';
 
+    public function __construct()
+    {
+        $this->configure();
+    }
+
+    private function configure()
+    {
+        $this->ignoreDirectory = [
+            $this->rootDirectory . 'api/',
+            $this->rootDirectory . 'css/',
+            $this->rootDirectory . 'images/',
+            $this->rootDirectory . 'js/',
+            $this->rootDirectory . 'mobile/',
+            $this->rootDirectory . 'scripts/',
+            $this->rootDirectory . 'tmp/',
+            $this->rootDirectory . 'vendor/',
+            $this->rootDirectory . 'views/'
+        ];
+
+        $this->ignoreFile = [
+            $this->rootDirectory . 'header-desktop.php',
+            $this->rootDirectory . 'template.php',
+            $this->rootDirectory . 'neemu-pages.php',
+            $this->rootDirectory . 'verify.php',
+            $this->rootDirectory . 'footer-desktop.php',
+            $this->rootDirectory . 'not-found.php'
+        ];
+
+        $this->allowedExtension = ['php'];
+    }
+
+    public function getRootDirectory()
+    {
+        return $this->rootDirectory;
+    }
+
+    public function getIgnoreDirectory()
+    {
+        return $this->ignoreDirectory;
+    }
+
+    public function getIgnoreFile()
+    {
+        return $this->ignoreFile;
+    }
+
+    public function getAllowedExtension()
+    {
+        return $this->allowedExtension;
+    }
 }

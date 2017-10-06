@@ -12,7 +12,7 @@ class ChaordicPatternChecker extends Checker
         parent::__construct($loader);
     }
 
-    protected function configure(): Checker
+    protected function configure()
     {
         /**
          * reset array of patterns

@@ -13,7 +13,7 @@ class CheckerContainer
      * 
      * @return \KR04\Checkers\CheckerContainer
      */
-    final public function setChecker(string $checker): CheckerContainer
+    final public function setChecker($checker)
     {
         if (!class_exists($checker)) {
             throw new InvalidClassException("The Class {$checker} is not valid.");
@@ -29,7 +29,7 @@ class CheckerContainer
      * 
      * @return array
      */
-    final public function getChecker(): array
+    final public function getChecker()
     {
         return $this->arrChecker;
     }

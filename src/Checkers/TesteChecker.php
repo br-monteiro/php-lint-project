@@ -13,14 +13,14 @@ class TesteChecker extends Checker
         parent::__construct($loader);
     }
 
-    protected function check(): Checker
+    protected function check()
     {
         Colorize::show('[bg-blue][white]This is a new Checker test[/]');
 
         return $this;
     }
 
-    protected function configure(): Checker
+    protected function configure()
     {
         /**
          * Don't need implementation =)

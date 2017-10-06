@@ -13,7 +13,7 @@ trait CheckersCommonTrait
      * @param string $line
      * @return boolean|int
      */
-    protected function getErrorNumberLine(string $line)
+    protected function getErrorNumberLine($line)
     {
         $explodedLine = explode(' on line ', $line);
 
@@ -30,7 +30,7 @@ trait CheckersCommonTrait
      * @param string $str The phrasal used to be describe the error
      * @param array $content Array of lines of the file
      */
-    protected function displayError(string $str, array $content = [])
+    protected function displayError($str, $content = [])
     {
         Colorize::show("[cyan]" . Config::STRING_SEPARATOR . "\n"
             . '[bg-red][white]' . $str . '[/]');
@@ -42,7 +42,7 @@ trait CheckersCommonTrait
      * 
      * @param string $str The phrasal used to be describe the success
      */
-    protected function displaySuccess(string $str)
+    protected function displaySuccess($str)
     {
         Colorize::show('[green]' . $str . '[/]');
     }
@@ -52,7 +52,7 @@ trait CheckersCommonTrait
      * 
      * @param string $str The phrasal used to be describe a normal message
      */
-    protected function displayNormal(string $str)
+    protected function displayNormal($str)
     {
         Colorize::show('[blue]' . $str . '[/]');
     }
@@ -66,7 +66,7 @@ trait CheckersCommonTrait
      * @param array $content Array of lines of the file
      * @return null null
      */
-    protected function displayPerimeterOfCode(int $reference, array $content)
+    protected function displayPerimeterOfCode($reference, array $content)
     {
         $contentLength = count($content);
 

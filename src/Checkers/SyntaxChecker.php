@@ -15,7 +15,7 @@ class SyntaxChecker extends Checker
         parent::__construct($loader);
     }
 
-    protected function check(): Checker
+    protected function check()
     {
         foreach ($this->loader->getOutput() as $path => $content) {
 
@@ -43,7 +43,7 @@ class SyntaxChecker extends Checker
         return $this;
     }
 
-    protected function configure(): Checker
+    protected function configure()
     {
         $this->descriptOrSpec = [
             0 => ["pipe", "r"],

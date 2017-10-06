@@ -15,7 +15,7 @@ class PsrChecker extends Checker
         parent::__construct($loader);
     }
 
-    protected function configure(): Checker
+    protected function configure()
     {
         /**
          *  pattern => description
