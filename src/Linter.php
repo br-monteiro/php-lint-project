@@ -6,14 +6,17 @@ use KR04\Checkers\Checker;
 use KR04\Files\Loader;
 use KR04\Checkers\CheckerContainer;
 use KR04\Exceptions\InvalidClassException;
+use KR04\Cli\Commands;
 
 class Linter
 {
 
     private $loader;
+    private $commands;
 
-    public function __construct(CheckerContainer $checkers)
+    public function __construct(CheckerContainer $checkers, Commands $commands)
     {
+        $this->commands = $commands;
         $config = new Config();
         $this->loader = new Loader($config->getRootDirectory());
 
@@ -28,9 +31,14 @@ class Linter
      */
     private function runChecker(CheckerContainer $checkers)
     {
-        foreach ($checkers->getChecker() as $checkerStr) {
+        $this->commands->listCheckers($checkers->getChecker());
 
-            $checker = new $checkerStr($this->loader);
+        foreach ($checkers->getChecker() as $checkerStr) {
+            if (!$this->commands->executeOnlyChecker($checkerStr) || !$this->commands->executeExceptChecker($checkerStr)) {
+                continue;
+            }
+
+            $checker = new $checkerStr($this->loader, $this->commands);
 
             if ($checker instanceof Checker) {
 

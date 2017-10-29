@@ -1,15 +1,16 @@
 <?php
 namespace KR04\Checkers;
 
-use KR04\Files\Loader;
 use KR04\Checkers\Checker;
+use KR04\Files\Loader;
+use KR04\Cli\Commands;
 
 class ChaordicPatternChecker extends Checker
 {
 
-    public function __construct(Loader $loader)
+    public function __construct(Loader $loader, Commands $commands)
     {
-        parent::__construct($loader);
+        parent::__construct($loader, $commands);
     }
 
     protected function configure()

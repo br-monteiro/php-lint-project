@@ -5,6 +5,8 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'a
 
 try {
 
+    $params = new \KR04\Cli\Params($argv);
+    $commands = new KR04\Cli\Commands($params);
     $checkerContainer = new KR04\Checkers\CheckerContainer();
     // register the Checker here!
     $checkerContainer->setChecker(\KR04\Checkers\SyntaxChecker::class);
@@ -12,7 +14,7 @@ try {
     $checkerContainer->setChecker(\KR04\Checkers\ChaordicPatternChecker::class);
 
     // init the verification into the files
-    new KR04\Linter($checkerContainer);
+    new KR04\Linter($checkerContainer, $commands);
 } catch (\Exception $ex) {
 
     \KR04\System\Colorize::show($ex);

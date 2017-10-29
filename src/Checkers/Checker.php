@@ -3,6 +3,7 @@ namespace KR04\Checkers;
 
 use KR04\Files\Loader;
 use KR04\Config\Config;
+use KR04\Cli\Commands;
 
 abstract class Checker
 {
@@ -10,11 +11,13 @@ abstract class Checker
     use CheckersCommonTrait;
 
     protected $loader;
+    protected $commands;
     protected $ignore = false;
 
-    public function __construct(Loader $loader)
+    public function __construct(Loader $loader, Commands $commands)
     {
         $this->loader = $loader;
+        $this->commands = $commands;
         $this->configure();
     }
 

@@ -1,18 +1,19 @@
 <?php
 namespace KR04\Checkers;
 
-use KR04\Exceptions\RuntimeProcessException;
-use KR04\Files\Loader;
 use KR04\Checkers\Checker;
+use KR04\Files\Loader;
+use KR04\Cli\Commands;
+use KR04\Exceptions\RuntimeProcessException;
 
 class SyntaxChecker extends Checker
 {
 
     protected $descriptOrSpec;
 
-    public function __construct(Loader $loader)
+    public function __construct(Loader $loader, Commands $commands)
     {
-        parent::__construct($loader);
+        parent::__construct($loader, $commands);
     }
 
     protected function check()

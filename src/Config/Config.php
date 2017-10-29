@@ -12,7 +12,7 @@ class Config
     /**
      * Directory of entry to scout
      */
-    private $rootDirectory = '.' . Config::DS;
+    private $rootDirectory = './filesTest/';//'.' . Config::DS;
 
     /**
      * List of skipped directories
