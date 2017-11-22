@@ -33,13 +33,13 @@ class Commands
 
     private function normalizeListCheckers()
     {
-        $rawListCheckers = $this->getParams('only-checker');
+        $rawListCheckers = $this->getParams('only');
         if ($rawListCheckers) {
             $rawListCheckers = strtolower($rawListCheckers);
             $this->listOnlyCheckers = explode(',', $rawListCheckers);
         }
 
-        $rawListCheckers = $this->getParams('except-checker');
+        $rawListCheckers = $this->getParams('except');
         if ($rawListCheckers) {
             $rawListCheckers = strtolower($rawListCheckers);
             $this->listExceptCheckers = explode(',', $rawListCheckers);
@@ -77,11 +77,16 @@ class Commands
 
     public function listCheckers(array $checkers)
     {
-        if ($this->getParams('list-checkers') === 'true') {
+        if ($this->getParams('list') === 'true') {
             foreach ($checkers as $index => $checker) {
                 $normalizedCheckerName = $this->normalizeCheckerName($checker);
                 Colorize::show('[bg-white][blue]' . ($index + 1) . '[/] - [yellow]' . $normalizedCheckerName . '[/]');
             }
+
+            if ($this->getParams('non-stop') === 'true') {
+                return;
+            }
+
             exit;
         }
     }
