@@ -25,7 +25,7 @@ class Commands
     public function stopExecution($callback, array $callbackParams = [])
     {
         if (
-            $this->getParams('stop') === 'true' && is_callable($callback) && $callback($callbackParams)
+            $this->getParams('stop') === true && is_callable($callback) && $callback($callbackParams)
         ) {
             exit;
         }
@@ -77,13 +77,13 @@ class Commands
 
     public function listCheckers(array $checkers)
     {
-        if ($this->getParams('list') === 'true') {
+        if ($this->getParams('list') === true) {
             foreach ($checkers as $index => $checker) {
                 $normalizedCheckerName = $this->normalizeCheckerName($checker);
                 Colorize::show('[bg-white][blue]' . ($index + 1) . '[/] - [yellow]' . $normalizedCheckerName . '[/]');
             }
 
-            if ($this->getParams('non-stop') === 'true') {
+            if ($this->getParams('non-stop') === true) {
                 return;
             }
 
