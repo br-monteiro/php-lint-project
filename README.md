@@ -5,7 +5,7 @@ O KR04 foi criado para verificar se os códigos PHP do seu projeto estão de aco
 
 ### Dependências
 
-- PHP 7.0+
+- PHP 5.6+
 - Composer
 
 ### Instalação
@@ -16,7 +16,7 @@ Abaixo é possível observar um exemplo de configuração do arquivo *__composer
 ```json
 {
     "require": {
-        "phbsis/kr04-php-lint": "^0.4.0"
+        "phbsis/kr04-php-lint": "^0.5.0"
     },
     "scripts": {
         "post-install-cmd": [
@@ -41,6 +41,27 @@ Por padrão, a biblioteca já vem com os checadores de Sintaxe, PSR-2, PSR-3 e p
 php checker-kr04
 ```
 
+### Parâmetros especiais no terminal
+
+O KR04 também possui alguns parâmetros que podem ser passados ao executar a verificação de seus aquivos PHP. Abaixo é possível ver a lista de atributos que já são usados pelo sistema. Caso seja necessário, também é possível receber os parâmetros nas Classes Checkers através da Injeção de Dependência de *KR04\Cli\Commands* que toda Checker possui.
+
+__list__ : Lista todos os Checkers registrados no sistema.
+```bash
+php checker-kr04 --list
+```
+__stop__ : Para a execução no primeiro erro encontrado.
+```bash
+php checker-kr04 --stop
+```
+__only__ : Executa somente os Checkers passados como parâmetro.
+```bash
+php checker-kr04 --only=chaordicpatternchecker,syntaxchecker
+```
+__except__ : Executa todos os demais Checkers, exceto os passados como parâmetro.
+```bash
+php checker-kr04 --except=syntaxchecker
+```
+
 ### Criando novas regras de verificação
 
 Novas regras podem ser criadas para atenderem às particularidades dos seus projetos. Para criar uma nova regra é muito simples, porém algumas passos devem ser seguidos para o correto funcionamento do sistema. Uma nova classe de regra (Checker) se parece com o seguinte:
@@ -50,16 +71,17 @@ namespace KR04\Checkers;
 
 use KR04\Checkers\Checker;
 use KR04\Files\Loader;
+use KR04\Cli\Commands;
 
 class TesteChecker extends Checker
 {
 
-    public function __construct(Loader $loader)
+    public function __construct(Loader $loader, Commands $commands)
     {
-        parent::__construct($loader);
+        parent::__construct($loader, $commands);
     }
 
-    protected function check(): Checker
+    protected function check()
     {
         /**
          * Aqui ficarão suas implementações de checagem das regras
@@ -67,7 +89,7 @@ class TesteChecker extends Checker
         return $this;
     }
 
-    protected function configure(): Checker
+    protected function configure()
     {
         /**
          * Aqui ficarão suas implementações de configurações
@@ -80,7 +102,7 @@ class TesteChecker extends Checker
 Toda classe a ser usada como Checker precisa seguir essas regras:
 - Ter o *namespace* setado como __KR04\Checkers__
 - Herdar a classe __KR04\Checkers\Checker__
-- Implementar o método __protected function configure(): Checker__
+- Implementar o método __protected function configure()__
 
 ### Salvando a nova Class Checker
 
@@ -117,41 +139,36 @@ Para que sua classe seja executada, a mesma precisa ser registrada no container 
     $checkerContainer->setChecker(\KR04\Checkers\TesteChecker::class);
 
     // init the verification into the files
-    new KR04\Linter($checkerContainer);
+    new KR04\Linter($checkerContainer, $commands);
    // código omitido
 ```
 
 ### Ignorando diretórios e arquivos
 
 Nem sempre queremos carregar determinados arquivos, sabendo disso, implementamos algumas formas de facilmente configurar o KR04.
-Para realizar este tipo de ação, basta adicionar o path relativo do arquivo como índice no array __IGNORE_FILE__. Este array encontra-se no arquivo __*./vendor/phbsis/kr04-php-lint/src/Config/Config.php*__. Abaixo é possível observar um exemplo de arquivos a serem ignorados:
+Para realizar este tipo de ação, basta adicionar o path relativo do arquivo como índice no array __$this->ignoreFile__. Este array encontra-se no arquivo __*./vendor/phbsis/kr04-php-lint/src/Config/Config.php*__. Há um método específico que inicia as configurações pra este tipo de ação. Abaixo é possível observar um exemplo de arquivos a serem ignorados:
 ```php
     // código omitido
-    /**
-     * List of skipped files
-     *
-     * Fill with relative path
-     */
-    const IGNORE_FILE = [
-        // ignorando os arquivos  header-desktop.php e  tmp/emplate.php
-        self::ROOT_DIRECTORY . 'header-desktop.php',
-        self::ROOT_DIRECTORY . 'tmp/emplate.php',
-    ];
+    private function configure()
+    {
+        $this->ignoreFile = [
+            $this->rootDirectory . 'header-desktop.php',
+            $this->rootDirectory . 'template.php'
+        ];
+    }
     // código omitido
 ```
-O mesmo procedimento pode ser seguido para ignorar diretórios (e seus subdiretórios), porém, o array responsável por conter essa ‘blacklist’ de diretórios é outro: __IGNORE_DIRECTORY__. Abaixo é possível observar um exemplo de diretórios a serem ignorados:
+O mesmo procedimento pode ser seguido para ignorar diretórios (e seus subdiretórios), porém, o array responsável por conter essa ‘blacklist’ de diretórios é outro: __$this->ignoreDirectory__. Abaixo é possível observar um exemplo de diretórios a serem ignorados:
 ```php
     // código omitido
-    /**
-     * List of skipped directories
-     *
-     * Fill with relative path
-     */
-    const IGNORE_DIRECTORY = [
-        // ignorando os diretórios  _libs e vendor
-        self::ROOT_DIRECTORY . '_libs/',
-        self::ROOT_DIRECTORY . 'vendor/'
-    ];
+    private function configure()
+    {
+        $this->ignoreDirectory = [
+            $this->rootDirectory . 'api/',
+            $this->rootDirectory . 'css/',
+            $this->rootDirectory . 'images/'
+        ];
+    }
     // código omitido
 ```
 
