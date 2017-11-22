@@ -15,13 +15,13 @@ class Params
         $this->prepareParams($rawInputParams);
     }
 
-    public function getParams($index = null)
+    public function getParams($index)
     {
         if ($index && array_key_exists($index, $this->params)) {
             return $this->params[$index];
         }
 
-        return null;
+        return in_array($index, $this->params);
     }
 
     private function prepareParams(array $rawInputParams)
@@ -48,11 +48,7 @@ class Params
 
     private function extractValues($value)
     {
-        $extractedValue = explode('=', $this->clearParam($value));
-
-        if (count($extractedValue) == 1) {
-            $extractedValue[] = null;
-        }
+        $extractedValue = explode('=', $this->cleanParam($value));
 
         return $extractedValue;
     }
@@ -68,12 +64,16 @@ class Params
                 continue;
             }
 
-            $arrParams[$extractValue[0]] = $extractValue[1];
+            if (isset($extractValue[1])) {
+                $arrParams[$extractValue[0]] = $extractValue[1];
+            } else {
+                $arrParams[] = $extractValue[0];
+            }
         }
         return $arrParams;
     }
 
-    private function clearParam($value)
+    private function cleanParam($value)
     {
         return str_replace('--', '', $value);
     }
