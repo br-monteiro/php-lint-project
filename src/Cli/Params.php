@@ -41,7 +41,7 @@ class Params
         return (bool) preg_match($pattern, $joinCommands);
     }
 
-    private function isReservedWork($word)
+    private function isReservedWord($word)
     {
         return in_array($word, $this->reservedWord);
     }
@@ -64,7 +64,7 @@ class Params
         foreach ($rawInputParams as $value) {
             $extractValue = $this->extractValues($value);
 
-            if ($this->isReservedWork($extractValue[0])) {
+            if ($this->isReservedWord($extractValue[0])) {
                 continue;
             }
 
