@@ -29,15 +29,17 @@ class Loader
      */
     private $config;
 
-    public function __construct($path)
+    public function __construct(Config $config)
     {
+        $path = $config->getRootDirectory();
+
         if (!file_exists($path)) {
             throw new LoaderFileException("The {$path} directory couldn't be loaded.");
         }
 
         $directory = new \RecursiveDirectoryIterator($path);
         $this->iterator = new \RecursiveIteratorIterator($directory);
-        $this->config = new Config();
+        $this->config = $config;
 
         $this->scoutDirectory();
     }
