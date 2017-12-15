@@ -1,6 +1,8 @@
 <?php
 namespace KR04\Config;
 
+use KR04\Cli\Commands;
+
 class Config
 {
 
@@ -58,9 +60,19 @@ class Config
      */
     const END_IGNORE = '@endignore';
 
-    public function __construct()
+    public function __construct(Commands $commands)
     {
+        $this->configRootDirectory($commands);
         $this->configure();
+    }
+
+    private function configRootDirectory(Commands $commands)
+    {
+        $path = $commands->getParams('path');
+
+        if ($path) {
+            $this->rootDirectory = $path;
+        }
     }
 
     private function configure()

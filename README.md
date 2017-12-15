@@ -43,8 +43,12 @@ php checker-kr04
 
 ### Parâmetros especiais no terminal
 
-O KR04 também possui alguns parâmetros que podem ser passados ao executar a verificação de seus aquivos PHP. Abaixo é possível ver a lista de atributos que já são usados pelo sistema. Caso seja necessário, também é possível receber os parâmetros nas Classes Checkers através da Injeção de Dependência de *KR04\Cli\Commands* que toda Checker possui.
+O KR04 também possui alguns parâmetros que podem ser passados ao executar a verificação de seus arquivos PHP. Abaixo é possível ver a lista de atributos que já são usados pelo sistema. Caso seja necessário, também é possível receber os parâmetros nas Classes Checkers através da Injeção de Dependência de *KR04\Cli\Commands* que toda Checker possui.
 
+__path__ : Altera o path do diretório base dos arquivos a serem verificados.
+```bash
+php checker-kr04 --path=./path/to/new/directory/
+```
 __list__ : Lista todos os Checkers registrados no sistema.
 ```bash
 php checker-kr04 --list

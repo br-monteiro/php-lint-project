@@ -17,8 +17,7 @@ class Linter
     public function __construct(CheckerContainer $checkers, Commands $commands)
     {
         $this->commands = $commands;
-        $config = new Config();
-        $this->loader = new Loader($config->getRootDirectory());
+        $this->loader = new Loader(new Config($commands));
 
         $this->runChecker($checkers);
     }
